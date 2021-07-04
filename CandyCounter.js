@@ -4,6 +4,10 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const discord = new Discord.Client();
+var data;
+var defaultPrefix = '$';
+
+// Various files.
 const dataLoc = ".\\people.json";
 const helpLoc = ".\\help.txt";
 const seduceLoc = ".\\pickupLines.txt";
@@ -11,8 +15,8 @@ const ratingLoc = ".\\ratings.txt";
 const ratingFile = fs.readFileSync(ratingLoc);
 const helpFile = fs.readFileSync(helpLoc);
 const seduceFile = fs.readFileSync(seduceLoc);
-var data;
-var defaultPrefix = '$';
+
+discord.login('NzUzNjY4Njk4MzcxNTIyNTkw.X1pirA.9JLwpU0tWogOyWdbzG0ot9I5yj8');
 
 // Is triggered when the bot is up and running.
 discord.on('ready', () => {
@@ -130,98 +134,3 @@ discord.on('message', message => {
             break;      
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-discord.login('NzUzNjY4Njk4MzcxNTIyNTkw.X1pirA.9JLwpU0tWogOyWdbzG0ot9I5yj8');
