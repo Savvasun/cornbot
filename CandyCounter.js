@@ -50,7 +50,7 @@ discord.on('message', message => {
         case ("say") :
             // Spweys out a message based off whatever the user said.
 
-            // TEMPORARY SOLUTION: change to slice after location of command, not fixed number. I don't understand what I just said either.
+            // TEMPORARY SOLUTION: change to slice after location of command, not fixed number.
             var string = all.slice(1).join(' ');
 
             message.channel.send(string);
@@ -71,7 +71,7 @@ discord.on('message', message => {
             var message__ = ``;
 
             if (data.members.length > 0){
-                for(var i=0;i<data.members.length;i++){
+                for (var i=0;i<data.members.length;i++){
                     message_.push(`**name**: ${data.members[i].name}, **pogness**: ${data.members[i].pogness} \n`);
                 }
             }
