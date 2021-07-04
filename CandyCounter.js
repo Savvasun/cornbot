@@ -25,12 +25,15 @@ discord.on('ready', () => {
 
 // Is triggered whenever a message is sent.
 discord.on('message', message => {
+    function Send(string) {
+        message.channel.send(string);
+    }
 
     // Checks if the prefix is used.
     if (!message.content.startsWith(defaultPrefix) || message.author.bot){
         if (!message.author.bot ) {
             if (message.content.toLowerCase() == "uwu" || message.content.toLowerCase() == "owo"){
-                message.channel.send("uwu");
+                Send(`uwu`);
                 return;
             }
         }
@@ -48,7 +51,7 @@ discord.on('message', message => {
     switch (command) {
         case ("help") :
             // Sends contents of the help text file.
-            message.channel.send(`${helpFile.toString()}`);
+            Send(`${helpFile.toString()}`);
             break;
         
         case ("say") :
@@ -57,7 +60,7 @@ discord.on('message', message => {
             // TEMPORARY SOLUTION: change to slice after location of command, not fixed number.
             var string = all.slice(1).join(' ');
 
-            message.channel.send(string);
+            Send(string);
             break;
             
         case ("candy") :
@@ -66,7 +69,7 @@ discord.on('message', message => {
         case ("prefix") :
             // The prefix command changes the prefix for the bot.
             prefix = arg;
-            message.channel.send(`Prefix was set to: ${prefix}`);
+            Send(`Prefix was set to: ${prefix}`);
             break;
 
         case ("showdata") :
@@ -80,11 +83,11 @@ discord.on('message', message => {
                 }
             }
             else {
-                message.channel.send(`There is no data in the file dumbass.`);
+                Send(`There is no data in the file dumbass.`);
             }
 
             message__ = message_.join('\n');
-            message.channel.send(message__);
+            Send(message__);
             break;
 
         case ("datareset") :
@@ -94,12 +97,12 @@ discord.on('message', message => {
                     members: []
                 }
                 fs.writeFileSync(dataLoc, JSON.stringify(data));
-                message.channel.send(`Data has been reset.`);
+                Send(`Data has been reset.`);
                 break;
             }
             else {
                 // Makes fun of you.
-                message.channel.send(`BRU UR NOT Sav U CANT HAHAHA`);
+                Send(`BRU UR NOT Sav U CANT HAHAHA`);
                 break;
             }
 
@@ -109,12 +112,12 @@ discord.on('message', message => {
             var lines = seduceFile.toString().split('\n');
             lineID = Math.floor(Math.random() * lines.length);
 
-            message.channel.send(lines[lineID]);
+            Send(lines[lineID]);
             break;
 
         case ("ping") :
             // Pong!
-            message.channel.send("pong!");
+            Send("pong!");
             break;
 
         case ("rate") :
@@ -128,7 +131,7 @@ discord.on('message', message => {
                 yRating = ratings[i].split(' ');
 
                 if (arg == yRating[0]){
-                    message.channel.send(ratings[i]);
+                    Send(ratings[i]);
                 }
             }
             break;      
