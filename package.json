@@ -1,0 +1,11 @@
+{
+    "name": "candycounterbot",
+    "description": "A bot that counts the amount of candy everyone has in the Halloween event on our Discord server",
+    "version": "1.0.0",
+    "main": "node CandyCounter.js",
+    "dependencies": {
+        "discord.js": "^12.0.0",
+        "node-gyp": "^8.1.0",
+        "python": "0.0.4"
+    }
+}
