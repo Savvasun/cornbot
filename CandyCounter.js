@@ -3,12 +3,14 @@
 // Initializes libs and variables for the program.
 const Discord = require('discord.js');
 const fs = require('fs');
+const discord = new Discord.Client();
 const dataLoc = ".\\people.json";
 const helpLoc = ".\\help.txt";
 const seduceLoc = ".\\pickupLines.txt";
+const ratingLoc = ".\\ratings.txt";
+const ratingFile = fs.readFileSync(ratingLoc);
 const helpFile = fs.readFileSync(helpLoc);
 const seduceFile = fs.readFileSync(seduceLoc);
-const discord = new Discord.Client();
 var data;
 var defaultPrefix = '$';
 
@@ -112,39 +114,18 @@ discord.on('message', message => {
             break;
 
         case ("rate") :
-            // Rates whoever is in the argument.
-            switch (arg) {
-                case ("sav") :
-                    message.channel.send("sav is h o t");
-                    break;
-                    
-                case ("sam") :
-                    message.channel.send("sam is u w u");
-                    break;
+            // Rates whoever is in the argument based on ratings.txt.
+            var ratings = [];
+            var yRating = [];
 
-                case ("parker") :
-                    message.channel.send("parker i s");
-                    break;
+            ratings = ratingFile.toString().split('\n');
 
-                case ("aris") :
-                    message.channel.send("aris is yes/:cat:");
-                    break;
+            for (var i=0;i<ratings.length;i++){
+                yRating = ratings[i].split(' ');
 
-                case ("andrew") :
-                    message.channel.send("andrew is a shrigma male");
-                    break;
-
-                case ("fed") :
-                    message.channel.send("fed is omega");
-                    break;
-
-                case ("gog") :
-                    message.channel.send("gog is pog");
-                    break;
-                
-                default :
-                    message.channel.send("sowwy uwu sav didnt add this pewson yet");
-                    break;
+                if (arg == yRating[0]){
+                    message.channel.send(ratings[i]);
+                }
             }
             break;      
     }
