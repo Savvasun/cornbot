@@ -9,10 +9,10 @@ var data;
 var defaultPrefix = '$';
 
 // Various files.
-const dataF = fs.readFileSync(".\\people.json")
-const ratingF = fs.readFileSync(".\\ratings.txt");
-const helpF = fs.readFileSync(".\\help.txt");
-const seduceF = fs.readFileSync(".\\pickupLines.txt");
+const dataF = fs.readFileSync(".\\data\\people.json")
+const ratingF = fs.readFileSync(".\\data\\ratings.txt");
+const helpF = fs.readFileSync(".\\data\\help.txt");
+const seduceF = fs.readFileSync(".\\data\\pickupLines.txt");
 
 discord.login('NzUzNjY4Njk4MzcxNTIyNTkw.X1pirA.9JLwpU0tWogOyWdbzG0ot9I5yj8');
 
@@ -94,7 +94,7 @@ discord.on('message', message => {
                 data = {
                     members: []
                 }
-                fs.writeFileSync(".\\people.json", JSON.stringify(data));
+                fs.writeFileSync(".\\data\\people.json", JSON.stringify(data));
                 Send(`Data has been reset.`);
                 break;
             }
