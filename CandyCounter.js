@@ -8,13 +8,10 @@ var data;
 var defaultPrefix = '$';
 
 // Various files.
-const dataLoc = ".\\people.json";
-const helpLoc = ".\\help.txt";
-const seduceLoc = ".\\pickupLines.txt";
-const ratingLoc = ".\\ratings.txt";
-const ratingFile = fs.readFileSync(ratingLoc);
-const helpFile = fs.readFileSync(helpLoc);
-const seduceFile = fs.readFileSync(seduceLoc);
+const dataF = fs.readFileSync(".\\people.json")
+const ratingF = fs.readFileSync(".\\ratings.txt");
+const helpF = fs.readFileSync(".\\help.txt");
+const seduceF = fs.readFileSync(".\\pickupLines.txt");
 
 discord.login('NzUzNjY4Njk4MzcxNTIyNTkw.X1pirA.9JLwpU0tWogOyWdbzG0ot9I5yj8');
 
@@ -45,13 +42,13 @@ discord.on('message', message => {
     const command = all[0].toLowerCase()
     const arg = all[1]
     const Name = message.author.username;
-    data = JSON.parse(fs.readFileSync(dataLoc));
+    data = JSON.parse(dataF);
 
     // Checks what command was used.
     switch (command) {
         case ("help") :
             // Sends contents of the help text file.
-            Send(`${helpFile.toString()}`);
+            Send(`${helpF.toString()}`);
             break;
         
         case ("say") :
@@ -109,7 +106,7 @@ discord.on('message', message => {
         case ("seduce") :
             // Spits out a random pickup line from the pickupLines.txt text file.
             var lineID = 0;
-            var lines = seduceFile.toString().split('\n');
+            var lines = seduceF.toString().split('\n');
             lineID = Math.floor(Math.random() * lines.length);
 
             Send(lines[lineID]);
@@ -125,7 +122,7 @@ discord.on('message', message => {
             var ratings = [];
             var yRating = [];
 
-            ratings = ratingFile.toString().split('\n');
+            ratings = ratingF.toString().split('\n');
 
             for (var i=0;i<ratings.length;i++){
                 yRating = ratings[i].split(' ');
