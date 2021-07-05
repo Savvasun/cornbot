@@ -4,6 +4,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const discord = new Discord.Client();
+var staff = ["sav", "drew2"];
 var data;
 var defaultPrefix = '$';
 
@@ -89,17 +90,17 @@ discord.on('message', message => {
 
         case ("datareset") :
             // The data reset command resets the variable and JSON file. Only I can use this command lmao.
-            if (message.author.username == "sav"){
+            if (staff.includes(message.author.username)){
                 data = {
                     members: []
                 }
-                fs.writeFileSync(dataLoc, JSON.stringify(data));
+                fs.writeFileSync(".\\people.json", JSON.stringify(data));
                 Send(`Data has been reset.`);
                 break;
             }
             else {
                 // Makes fun of you.
-                Send(`BRU UR NOT Sav U CANT HAHAHA`);
+                Send(`BRU UR NOT STAFF U CANT HAHAHA`);
                 break;
             }
 
@@ -123,12 +124,17 @@ discord.on('message', message => {
             var yRating = [];
 
             ratings = ratingF.toString().split('\n');
-
+            
             for (var i=0;i<ratings.length;i++){
                 yRating = ratings[i].split(' ');
 
-                if (arg == yRating[0]){
+                if (!yRating.includes(arg) && i >= ratings.length-1){
+                    Send(`this person ain't on the list sowy`);
+                    return;
+                }
+                if (yRating.includes(arg)){
                     Send(ratings[i]);
+                    return;
                 }
             }
             break;      
