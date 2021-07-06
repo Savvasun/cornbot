@@ -8,7 +8,7 @@ var staff = ["sav", "drew2"];
 var data;
 var defaultPrefix = '$';
 
-discord.login('NzUzNjY4Njk4MzcxNTIyNTkw.X1pirA.9JLwpU0tWogOyWdbzG0ot9I5yj8');
+discord.login('ODYxODU1MDk5ODU1Njk5OTcw.YOP3HA.heCCX9gV6C6K3VZDtIVwDL1hGZ4');
 
 // Is triggered when the bot is up and running.
 discord.on('ready', () => {
