@@ -11,7 +11,7 @@ var defaultPrefix = '$';
 
 // Is triggered when the bot is up and running.
 discord.on('ready', () => {
-  console.log(`uwu im wweady to stawt wowking uwu`);
+  console.log(`online`);
 });
 
 // Is triggered whenever a message is sent.
@@ -77,7 +77,7 @@ discord.on('message', message => {
                 }
                 if (arg == data.members[i].name) {
                     data.members[i].pogness = all[2];
-                    Send(`Entry with name of ${data.members[i].name} with pogness of ${all[2]}`);
+                    Send(`Entry with name of ${data.members[i].name} with value of ${all[2]}`);
 
                     fs.writeFileSync(".\\data\\people.json", JSON.stringify(data));
                     break;
@@ -92,11 +92,11 @@ discord.on('message', message => {
 
             if (data.members.length > 0){
                 for (var i=0;i<data.members.length;i++){
-                    message_.push(`**name**: ${data.members[i].name}, **pogness**: ${data.members[i].pogness} \n`);
+                    message_.push(`**name**: ${data.members[i].name}, **value**: ${data.members[i].pogness} \n`);
                 }
             }
             else {
-                Send(`There is no data in the file dumbass.`);
+                Send(`There is no data in the file.`);
             }
 
             message__ = message_.join('\n');
@@ -115,7 +115,7 @@ discord.on('message', message => {
             }
             else {
                 // Makes fun of you.
-                Send(`BRU UR NOT STAFF U CANT HAHAHA`);
+                Send(`u aren't staff`);
                 break;
             }
 
@@ -144,7 +144,7 @@ discord.on('message', message => {
                 yRating = ratings[i].split(' ');
 
                 if (!yRating.includes(arg) && i >= ratings.length-1){
-                    Send(`this person ain't on the list sowy`);
+                    Send(`this person is too cool`);
                     return;
                 }
                 if (yRating.includes(arg)){

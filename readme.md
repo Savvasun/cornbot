@@ -10,7 +10,7 @@
 
 `$showdata` shows the data from the bot's JSON file in a readable format. Currently used for testing purposes, not useful.
 
-`$data [person] [pogness]` changes the pogness of the named person's entry in people.json.
+`$data [person] [value]` changes the value of the named person's entry in people.json.
 
 `$datareset` resets all data in the JSON file. Only sav can use it.
 
@@ -18,4 +18,4 @@
 
 `$ping` pong!
 
-`$rate [person]` rates people that are part of the code, if not, does an uwu.
+`$rate [person]` rates people that are part of the code.
