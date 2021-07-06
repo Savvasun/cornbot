@@ -10,7 +10,7 @@
 
 `$showdata` shows the data from the bot's JSON file in a readable format. Currently used for testing purposes, not useful.
 
-`$data [person] [pogness]` cahnges the pogness of the named person's entry in people.json.
+`$data [person] [pogness]` changes the pogness of the named person's entry in people.json.
 
 `$datareset` resets all data in the JSON file. Only sav can use it.
 
