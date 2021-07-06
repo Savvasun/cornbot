@@ -4,8 +4,8 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const discord = new Discord.Client();
-require('dotenv').config();
-var staff = ["sav", "drew2"];
+require('dotenv').config({path:'.\\configs\\.env'});
+var staff = process.env.staff.split(' ');
 var data;
 var defaultPrefix = '$';
 
