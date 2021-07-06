@@ -5,11 +5,11 @@
   "main": "CandyCounter.js",
   "dependencies": {
     "discord.js": "^12.5.3",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "dotenv": "^10.0.0"
   },
   "devDependencies": {},
   "scripts": {
+    "start": "CandyCounter.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
