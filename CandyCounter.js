@@ -156,4 +156,4 @@ discord.on('message', message => {
     }
 });
 
-discord.login(process.env.token_dev);
+discord.login(process.env.token_main); // CHANGE TO MAIN TOKEN EACH MERGE
