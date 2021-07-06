@@ -4,11 +4,10 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const discord = new Discord.Client();
+require('dotenv').config({path:'.\\configs\\.env'});
 var staff = ["sav", "drew2"];
 var data;
 var defaultPrefix = '$';
-
-discord.login('ODYxODU1MDk5ODU1Njk5OTcw.YOP3HA.heCCX9gV6C6K3VZDtIVwDL1hGZ4');
 
 // Is triggered when the bot is up and running.
 discord.on('ready', () => {
@@ -156,3 +155,5 @@ discord.on('message', message => {
             break;      
     }
 });
+
+discord.login(process.env.token_dev);
