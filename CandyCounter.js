@@ -4,14 +4,9 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const discord = new Discord.Client();
+var staff = ["sav", "drew2"];
 var data;
 var defaultPrefix = '$';
-
-// Various files.
-const dataF = fs.readFileSync(".\\people.json")
-const ratingF = fs.readFileSync(".\\ratings.txt");
-const helpF = fs.readFileSync(".\\help.txt");
-const seduceF = fs.readFileSync(".\\pickupLines.txt");
 
 discord.login('NzUzNjY4Njk4MzcxNTIyNTkw.X1pirA.9JLwpU0tWogOyWdbzG0ot9I5yj8');
 
@@ -22,6 +17,11 @@ discord.on('ready', () => {
 
 // Is triggered whenever a message is sent.
 discord.on('message', message => {
+    var dataF = fs.readFileSync(".\\data\\people.json")
+    var ratingF = fs.readFileSync(".\\data\\ratings.txt");
+    var helpF = fs.readFileSync(".\\data\\help.txt");
+    var seduceF = fs.readFileSync(".\\data\\pickupLines.txt");
+
     function Send(string) {
         message.channel.send(string);
     }
@@ -69,6 +69,23 @@ discord.on('message', message => {
             Send(`Prefix was set to: ${prefix}`);
             break;
 
+        case ("data") :
+            // Changes an entry in people.json.
+            for (var i=0;i<data.members.length;i++){
+                if (arg != data.members[i].name && i >= data.members.length-1){
+                    Send(`there isn't a person with that name in the file`);
+                    break;
+                }
+                if (arg == data.members[i].name) {
+                    data.members[i].pogness = all[2];
+                    Send(`Entry with name of ${data.members[i].name} with pogness of ${all[2]}`);
+
+                    fs.writeFileSync(".\\data\\people.json", JSON.stringify(data));
+                    break;
+                }
+            }
+            break;
+
         case ("showdata") :
             // Shows the data in people.json in a readable text message.
             var message_ = [];
@@ -89,17 +106,17 @@ discord.on('message', message => {
 
         case ("datareset") :
             // The data reset command resets the variable and JSON file. Only I can use this command lmao.
-            if (message.author.username == "sav"){
+            if (staff.includes(message.author.username)){
                 data = {
                     members: []
                 }
-                fs.writeFileSync(dataLoc, JSON.stringify(data));
+                fs.writeFileSync(".\\data\\people.json", JSON.stringify(data));
                 Send(`Data has been reset.`);
                 break;
             }
             else {
                 // Makes fun of you.
-                Send(`BRU UR NOT Sav U CANT HAHAHA`);
+                Send(`BRU UR NOT STAFF U CANT HAHAHA`);
                 break;
             }
 
@@ -123,12 +140,17 @@ discord.on('message', message => {
             var yRating = [];
 
             ratings = ratingF.toString().split('\n');
-
+            
             for (var i=0;i<ratings.length;i++){
                 yRating = ratings[i].split(' ');
 
-                if (arg == yRating[0]){
+                if (!yRating.includes(arg) && i >= ratings.length-1){
+                    Send(`this person ain't on the list sowy`);
+                    return;
+                }
+                if (yRating.includes(arg)){
                     Send(ratings[i]);
+                    return;
                 }
             }
             break;      
