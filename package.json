@@ -9,7 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "CandyCounter.js",
+    "start": "node CandyCounter.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
