@@ -6,7 +6,6 @@ const fs = require('fs');
 const discord = new Discord.Client();
 require('dotenv').config({path:'.\\configs\\.env'});
 var staff = process.env.staff.split(' ');
-console.log(staff);
 var data;
 var defaultPrefix = '$';
 
@@ -157,4 +156,4 @@ discord.on('message', message => {
     }
 });
 
-discord.login(process.env.token_dev);
+discord.login(process.env.token_main); // CHANGE TO MAIN TOKEN EACH MERGE
