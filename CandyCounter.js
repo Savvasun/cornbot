@@ -8,12 +8,6 @@ var staff = ["sav", "drew2"];
 var data;
 var defaultPrefix = '$';
 
-// Various files.
-const dataF = fs.readFileSync(".\\data\\people.json")
-const ratingF = fs.readFileSync(".\\data\\ratings.txt");
-const helpF = fs.readFileSync(".\\data\\help.txt");
-const seduceF = fs.readFileSync(".\\data\\pickupLines.txt");
-
 discord.login('NzUzNjY4Njk4MzcxNTIyNTkw.X1pirA.9JLwpU0tWogOyWdbzG0ot9I5yj8');
 
 // Is triggered when the bot is up and running.
@@ -23,6 +17,11 @@ discord.on('ready', () => {
 
 // Is triggered whenever a message is sent.
 discord.on('message', message => {
+    var dataF = fs.readFileSync(".\\data\\people.json")
+    var ratingF = fs.readFileSync(".\\data\\ratings.txt");
+    var helpF = fs.readFileSync(".\\data\\help.txt");
+    var seduceF = fs.readFileSync(".\\data\\pickupLines.txt");
+
     function Send(string) {
         message.channel.send(string);
     }
@@ -68,6 +67,23 @@ discord.on('message', message => {
             // The prefix command changes the prefix for the bot.
             prefix = arg;
             Send(`Prefix was set to: ${prefix}`);
+            break;
+
+        case ("data") :
+            // Changes an entry in people.json.
+            for (var i=0;i<data.members.length;i++){
+                if (arg != data.members[i].name && i >= data.members.length-1){
+                    Send(`there isn't a person with that name in the file`);
+                    break;
+                }
+                if (arg == data.members[i].name) {
+                    data.members[i].pogness = all[2];
+                    Send(`Entry with name of ${data.members[i].name} with pogness of ${all[2]}`);
+
+                    fs.writeFileSync(".\\data\\people.json", JSON.stringify(data));
+                    break;
+                }
+            }
             break;
 
         case ("showdata") :
