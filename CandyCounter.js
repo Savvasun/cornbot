@@ -13,7 +13,7 @@ app.listen(port, () => console.log(`Example app listening at http://localhost:${
 const Discord = require('discord.js');
 const fs = require('fs');
 const discord = new Discord.Client();
-require('dotenv').config({path:'.\\configs\\.env'});
+require('dotenv').config();
 var staff = ["sav", "drew2"];
 var data;
 var defaultPrefix = '$';
