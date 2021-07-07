@@ -7,7 +7,7 @@ const port = 3000;
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
-app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
+app.listen(port, () => console.log(`app listening at http://localhost:${port}`));
 
 
 // Initializes libs and variables for the program.
@@ -15,13 +15,14 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const discord = new Discord.Client();
 require('dotenv').config();
-var staff = process.env.staff.split(' ');
 var data;
 var defaultPrefix = '$';
 
+discord.login(process.env.token_dev); // CHANGE TO MAIN TOKEN EACH MERGE
+
 // Is triggered when the bot is up and running.
 discord.on('ready', () => {
-  console.log(`online`);
+  console.log(`logged in as ${discord.user.tag}!`);
 });
 
 // Is triggered whenever a message is sent.
@@ -66,7 +67,7 @@ discord.on('message', message => {
             // TEMPORARY SOLUTION: change to slice after location of command, not fixed number.
             var string = all.slice(1).join(' ');
 
-            Send(string);
+            Send(message.mentions.everyone ? `don't try to fool me` : string);
             break;
             
         case ("candy") :
@@ -114,8 +115,8 @@ discord.on('message', message => {
             break;
 
         case ("datareset") :
-            // The data reset command resets the variable and JSON file. Only I can use this command lmao.
-            if (staff.includes(message.author.username)){
+            // The data reset command resets the variable and JSON file. Only people with "Staff" role can use it.
+            if (message.member.roles.cache.some(role => role.name == 'Staff')){
                 data = {
                     members: []
                 }
@@ -124,7 +125,6 @@ discord.on('message', message => {
                 break;
             }
             else {
-                // Makes fun of you.
                 Send(`u aren't staff`);
                 break;
             }
@@ -165,5 +165,3 @@ discord.on('message', message => {
             break;      
     }
 });
-
-discord.login(process.env.token_main); // CHANGE TO MAIN TOKEN EACH MERGE
