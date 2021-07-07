@@ -18,7 +18,7 @@ require('dotenv').config();
 var data;
 var defaultPrefix = '$';
 
-discord.login(process.env.token_dev); // CHANGE TO MAIN TOKEN EACH MERGE
+discord.login(process.env.token_main); // CHANGE TO MAIN TOKEN EACH MERGE
 
 // Is triggered when the bot is up and running.
 discord.on('ready', () => {
