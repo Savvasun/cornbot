@@ -1,13 +1,13 @@
 'use strict';
 
-// Keeps bot alive.
+// Keeps bot alive using a small app that is pinged by UptimeRobot.
 const express = require('express');
 const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
 
 
 // Initializes libs and variables for the program.
@@ -26,10 +26,10 @@ discord.on('ready', () => {
 
 // Is triggered whenever a message is sent.
 discord.on('message', message => {
-    var dataF = fs.readFileSync(".\\data\\people.json")
-    var ratingF = fs.readFileSync(".\\data\\ratings.txt");
-    var helpF = fs.readFileSync(".\\data\\help.txt");
-    var seduceF = fs.readFileSync(".\\data\\pickupLines.txt");
+    var dataF = fs.readFileSync("data/people.json")
+    var ratingF = fs.readFileSync("data/ratings.txt");
+    var helpF = fs.readFileSync("data/help.txt");
+    var seduceF = fs.readFileSync("data/pickupLines.txt");
 
     function Send(string) {
         message.channel.send(string);
