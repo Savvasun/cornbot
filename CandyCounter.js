@@ -21,15 +21,15 @@ discord.login(process.env.token_dev); // CHANGE TO MAIN TOKEN EACH MERGE
 
 // Is triggered when the bot is up and running.
 discord.on('ready', () => {
-  console.log(`logged in as ${discord.user.tag}!`);
+  console.log(`logged in as ${discord.user.tag}\nprefix set to '${defaultPrefix}'`);
 });
 
 // Is triggered whenever a message is sent.
 discord.on('message', message => {
-    var dataF = fs.readFileSync("data/people.json")
-    var ratingF = fs.readFileSync("data/ratings.txt");
-    var helpF = fs.readFileSync("data/help.txt");
-    var seduceF = fs.readFileSync("data/pickupLines.txt");
+    var dataF = fs.readFileSync("data/people.json"),
+        ratingF = fs.readFileSync("data/ratings.txt"),
+        helpF = fs.readFileSync("data/help.txt"),
+        seduceF = fs.readFileSync("data/pickupLines.txt");
 
     function Send(string) {
         message.channel.send(string);
@@ -38,10 +38,7 @@ discord.on('message', message => {
     // Checks if the prefix is used.
     if (!message.content.startsWith(defaultPrefix) || message.author.bot){
         if (!message.author.bot ) {
-            if (message.content.toLowerCase() == "uwu" || message.content.toLowerCase() == "owo"){
-                Send(`uwu`);
-                return;
-            }
+            if (message.content.toLowerCase() == "uwu" || message.content.toLowerCase() == "owo") Send("uwu");
         }
         return;
     }
@@ -50,7 +47,6 @@ discord.on('message', message => {
     const all = message.content.slice(defaultPrefix.length).trim().split(' ');
     const command = all[0].toLowerCase()
     const arg = all[1]
-    const Name = message.author.username;
     data = JSON.parse(dataF);
 
     // Checks what command was used.
@@ -78,20 +74,43 @@ discord.on('message', message => {
             Send(`Prefix was set to: ${prefix}`);
             break;
 
-        case ("data") :
+        case ("changedata") :
             // Changes an entry in people.json.
             for (var i=0;i<data.members.length;i++){
-                if (arg != data.members[i].name && i >= data.members.length-1){
-                    Send(`there isn't a person with that name in the file`);
-                    break;
-                }
+                if (arg != data.members[i].name && i == data.members.length-1) Send(`No person with such name, use \`$dataadd\` to add entries`);
                 if (arg == data.members[i].name) {
-                    data.members[i].pogness = all[2];
-                    Send(`Entry with name of ${data.members[i].name} with value of ${all[2]}`);
+                    data.members[i].value = all[2];
+                    Send(`Entry with name of ${data.members[i].name} changed to value of ${all[2]}`);
 
                     fs.writeFileSync(".\\data\\people.json", JSON.stringify(data));
-                    break;
+                    return;
                 }
+            }
+            break;
+
+        case ("adddata") :
+            // Add an entry in people.json
+            function eAdd(){
+                data.members.push(
+                {
+                    name:arg,
+                    value:all[2]
+                }
+                );
+                Send(`Entry with name of ${arg} and value of ${all[2]} has been added`);
+                fs.writeFileSync(".\\data\\people.json", JSON.stringify(data));
+            }
+            if (data.members.length > 0){
+                for(var i=0;i<data.members.length;i++){
+                    if (data.members[i].name == arg) Send('This person is already in the file');
+                    if (arg != data.members[i].name && i == data.members.length-1){
+                        eAdd();
+                        return;
+                    }
+                }
+            }
+            else {
+                eAdd();
             }
             break;
 
@@ -102,7 +121,7 @@ discord.on('message', message => {
 
             if (data.members.length > 0){
                 for (var i=0;i<data.members.length;i++){
-                    message_.push(`**name**: ${data.members[i].name}, **value**: ${data.members[i].pogness} \n`);
+                    message_.push(`**name**: ${data.members[i].name}, **value**: ${data.members[i].value} \n`);
                 }
             }
             else {
