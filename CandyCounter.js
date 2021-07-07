@@ -9,7 +9,6 @@ app.get('/', (req, res) => res.send('Hello World!'));
 
 app.listen(port, () => console.log(`app listening at http://localhost:${port}`));
 
-
 // Initializes libs and variables for the program.
 const Discord = require('discord.js');
 const fs = require('fs');
@@ -67,7 +66,7 @@ discord.on('message', message => {
             // TEMPORARY SOLUTION: change to slice after location of command, not fixed number.
             var string = all.slice(1).join(' ');
 
-            Send(message.mentions.everyone ? `don't try to fool me` : string);
+            Send(string.includes("@here") || string.includes("@everyone") ? `don't try to fool me` : string);
             break;
             
         case ("candy") :
