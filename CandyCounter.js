@@ -78,7 +78,7 @@ discord.on('message', message => {
         case ("changedata") :
             // Changes an entry in people.json.
             for (var i=0;i<mems.length;i++){
-                if (arg != mems[i].name && i == mems.length-1) Send(`No person with such name, use \`$dataadd\` to add entries`);
+                if (arg != mems[i].name && i == mems.length-1) Send(`No entry with such name, use \`$dataadd\` to add entries`);
                 if (arg == mems[i].name) {
                     mems[i].value = all[2];
                     Send(`Entry with name of ${mems[i].name} changed to value of ${all[2]}`);
@@ -115,6 +115,20 @@ discord.on('message', message => {
             }
             break;
 
+        case ("removedata") :
+            // Removes entry with specified name.
+            for(var i=0;i<mems.length;i++){
+                if (arg != mems[i].name && i == mems.length-1) Send(`Couldn't find entry with that name`);
+                if (arg == mems[i].name){
+                    mems.splice(i, i);
+                    Send(`Entry with name of ${arg} was removed`);
+
+                    fs.writeFileSync(".\\data\\people.json", JSON.stringify(data));
+                    return;
+                }
+            }
+            break;
+            
         case ("showdata") :
             // Shows the data in people.json in a readable text message.
             var message_ = [];
