@@ -48,6 +48,7 @@ discord.on('message', message => {
     const command = all[0].toLowerCase()
     const arg = all[1]
     data = JSON.parse(dataF);
+    var mems = data.members;
 
     // Checks what command was used.
     switch (command) {
@@ -76,11 +77,11 @@ discord.on('message', message => {
 
         case ("changedata") :
             // Changes an entry in people.json.
-            for (var i=0;i<data.members.length;i++){
-                if (arg != data.members[i].name && i == data.members.length-1) Send(`No person with such name, use \`$dataadd\` to add entries`);
-                if (arg == data.members[i].name) {
-                    data.members[i].value = all[2];
-                    Send(`Entry with name of ${data.members[i].name} changed to value of ${all[2]}`);
+            for (var i=0;i<mems.length;i++){
+                if (arg != mems[i].name && i == mems.length-1) Send(`No person with such name, use \`$dataadd\` to add entries`);
+                if (arg == mems[i].name) {
+                    mems[i].value = all[2];
+                    Send(`Entry with name of ${mems[i].name} changed to value of ${all[2]}`);
 
                     fs.writeFileSync(".\\data\\people.json", JSON.stringify(data));
                     return;
@@ -91,7 +92,7 @@ discord.on('message', message => {
         case ("adddata") :
             // Add an entry in people.json
             function eAdd(){
-                data.members.push(
+                mems.push(
                 {
                     name:arg,
                     value:all[2]
@@ -100,10 +101,10 @@ discord.on('message', message => {
                 Send(`Entry with name of ${arg} and value of ${all[2]} has been added`);
                 fs.writeFileSync(".\\data\\people.json", JSON.stringify(data));
             }
-            if (data.members.length > 0){
-                for(var i=0;i<data.members.length;i++){
-                    if (data.members[i].name == arg) Send('This person is already in the file');
-                    if (arg != data.members[i].name && i == data.members.length-1){
+            if (mems.length > 0){
+                for(var i=0;i<mems.length;i++){
+                    if (mems[i].name == arg) Send('This person is already in the file');
+                    if (arg != mems[i].name && i == mems.length-1){
                         eAdd();
                         return;
                     }
@@ -119,9 +120,9 @@ discord.on('message', message => {
             var message_ = [];
             var message__ = ``;
 
-            if (data.members.length > 0){
-                for (var i=0;i<data.members.length;i++){
-                    message_.push(`**name**: ${data.members[i].name}, **value**: ${data.members[i].value} \n`);
+            if (mems.length > 0){
+                for (var i=0;i<mems.length;i++){
+                    message_.push(`**name**: ${mems[i].name}, **value**: ${mems[i].value} \n`);
                 }
             }
             else {
