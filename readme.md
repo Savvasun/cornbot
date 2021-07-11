@@ -14,6 +14,8 @@
 
 `$adddata [name] [value]` adds an entry with the name specified and the value specified.
 
+`$removedata [name]` removes an entry with specified name.
+
 `$datareset` resets all data in the JSON file. Only sav can use it.
 
 `$seduce` spits out a random pickup line. Will add more over time.
