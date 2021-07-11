@@ -10,7 +10,11 @@
 
 `$showdata` shows the data from the bot's JSON file in a readable format. Currently used for testing purposes, not useful.
 
-`$data [person] [value]` changes the value of the named person's entry in people.json.
+`$changedata [name] [value]` changes an entry with the name specified in the file to the value specified.
+
+`$adddata [name] [value]` adds an entry with the name specified and the value specified.
+
+`$removedata [name]` removes an entry with specified name.
 
 `$datareset` resets all data in the JSON file. Only sav can use it.
 
