@@ -29,7 +29,8 @@ discord.on('message', message => {
     var dataF = fs.readFileSync("data/people.json"),
         ratingF = fs.readFileSync("data/ratings.txt"),
         helpF = fs.readFileSync("data/help.txt"),
-        seduceF = fs.readFileSync("data/pickupLines.txt");
+        seduceF = fs.readFileSync("data/pickupLines.txt"),
+        changeF = fs.readFileSync("data/changelog.txt");
 
     function Send(string) {
         message.channel.send(string);
@@ -55,6 +56,11 @@ discord.on('message', message => {
         case ("help") :
             // Sends contents of the help text file.
             Send(`${helpF.toString()}`);
+            break;
+
+        case ("changelog") :
+            // Sends a changelog of the changes since last merge.
+            Send(`${changeF.toString()}`);
             break;
         
         case ("say") :
