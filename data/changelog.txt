@@ -3,3 +3,5 @@
 * Split `$data` command into `$adddata`, `$changedata`, and `$removedata`, which separately let you change the contents of people.json
 
 * More ratings and pickup lines
+
+* Bug fixes

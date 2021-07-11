@@ -21,7 +21,7 @@ discord.login(process.env.token_dev); // CHANGE TO MAIN TOKEN EACH MERGE
 
 // Is triggered when the bot is up and running.
 discord.on('ready', () => {
-  console.log(`logged in as ${discord.user.tag}\nprefix set to '${defaultPrefix}'`);
+  console.log(`logged in as ${discord.user.tag}\nprefix set to \'${defaultPrefix}\'`);
 });
 
 // Is triggered whenever a message is sent.
@@ -192,11 +192,11 @@ discord.on('message', message => {
             for (var i=0;i<ratings.length;i++){
                 yRating = ratings[i].split(' ');
 
-                if (!yRating.includes(arg) && i >= ratings.length-1){
+                if (!yRating.includes(arg.toLowerCase()) && i == ratings.length-1){
                     Send(`this person is too cool`);
                     return;
                 }
-                if (yRating.includes(arg)){
+                if (yRating.includes(arg.toLowerCase())){
                     Send(ratings[i]);
                     return;
                 }
